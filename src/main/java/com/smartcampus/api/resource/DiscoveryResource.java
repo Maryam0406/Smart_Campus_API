@@ -7,7 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
-@Path("/api")
+@Path("/api/v1")
 public class DiscoveryResource {
 
     @GET
