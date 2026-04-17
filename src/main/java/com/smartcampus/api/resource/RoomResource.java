@@ -29,4 +29,11 @@ public class RoomResource {
     public Room getRoom(@PathParam("id") String id) {
         return roomService.getRoomById(id);
     }
+    
+    @POST
+    @Path("/{roomId}/sensors/{sensorId}")
+    public Room addSensorToRoom(@PathParam("roomId") String roomId,
+                                @PathParam("sensorId") String sensorId) {
+        return roomService.addSensorToRoom(roomId, sensorId);
+    }
 }
