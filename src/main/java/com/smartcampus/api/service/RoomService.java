@@ -1,5 +1,6 @@
 package com.smartcampus.api.service;
 
+import com.smartcampus.api.exception.RoomNotFoundException;
 import com.smartcampus.api.model.Room;
 import java.util.*;
 
@@ -15,4 +16,13 @@ public class RoomService {
         rooms.put(room.getId(), room);
         return room;
     }
+    
+    public Room getRoomById(String id) {
+    Room room = rooms.get(id);
+    if (room == null) {
+        throw new RoomNotFoundException("Room not found");
+    }
+    return room;
+}
+    
 }

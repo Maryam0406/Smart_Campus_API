@@ -23,4 +23,10 @@ public class RoomResource {
     public Room addRoom(Room room) {
         return roomService.addRoom(room);
     }
+    
+    @GET
+    @Path("/{id}")
+    public Room getRoom(@PathParam("id") String id) {
+        return roomService.getRoomById(id);
+    }
 }
