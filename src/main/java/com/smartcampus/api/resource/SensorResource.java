@@ -14,7 +14,6 @@ public class SensorResource {
 
     private SensorService sensorService = new SensorService();
 
-    // UPDATED GET WITH FILTERING
     @GET
     public List<Sensor> getSensors(@QueryParam("type") String type) {
 
@@ -28,5 +27,10 @@ public class SensorResource {
     @POST
     public Sensor addSensor(Sensor sensor) {
         return sensorService.addSensor(sensor);
+    }
+
+    @Path("/{sensorId}/readings")
+    public SensorReadingResource getReadings(@PathParam("sensorId") String sensorId) {
+        return new SensorReadingResource(sensorId);
     }
 }
