@@ -1,6 +1,8 @@
 package com.smartcampus.api.service;
 
 import com.smartcampus.api.exception.RoomNotFoundException;
+import com.smartcampus.api.exception.SensorNotFoundException; 
+import com.smartcampus.api.exception.DuplicateResourceException; 
 import com.smartcampus.api.model.Room;
 import java.util.*;
 
@@ -16,7 +18,7 @@ public class RoomService {
     // ADD ROOM
     public Room addRoom(Room room) {
         if (rooms.containsKey(room.getId())) {
-            throw new RuntimeException("Room already exists");
+            throw new DuplicateResourceException("Room already exists"); 
         }
         rooms.put(room.getId(), room);
         return room;
@@ -50,12 +52,12 @@ public class RoomService {
 
         // check sensor exists
         if (!SensorService.sensorExists(sensorId)) {
-            throw new RuntimeException("Sensor not found");
+            throw new SensorNotFoundException("Sensor not found"); 
         }
 
         // prevent duplicate assignment
         if (room.getSensorIds().contains(sensorId)) {
-            throw new RuntimeException("Sensor already assigned to room");
+            throw new DuplicateResourceException("Sensor already assigned to room"); 
         }
 
         room.getSensorIds().add(sensorId);
