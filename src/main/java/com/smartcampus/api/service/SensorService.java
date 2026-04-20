@@ -7,23 +7,19 @@ public class SensorService {
 
     private static Map<String, Sensor> sensors = new HashMap<>();
 
-    // GET ALL SENSORS
     public List<Sensor> getAllSensors() {
         return new ArrayList<>(sensors.values());
     }
 
-    // ADD SENSOR
     public Sensor addSensor(Sensor sensor) {
         sensors.put(sensor.getId(), sensor);
         return sensor;
     }
 
-    // CHECK IF SENSOR EXISTS
     public static boolean sensorExists(String id) {
         return sensors.containsKey(id);
     }
 
-    // 🔥 NEW METHOD (FILTERING)
     public List<Sensor> getSensorsByType(String type) {
         List<Sensor> result = new ArrayList<>();
 
@@ -34,5 +30,12 @@ public class SensorService {
         }
 
         return result;
+    }
+
+    public void updateSensorValue(String sensorId, double value) {
+        Sensor sensor = sensors.get(sensorId);
+        if (sensor != null) {
+            sensor.setValue(value);
+        }
     }
 }
