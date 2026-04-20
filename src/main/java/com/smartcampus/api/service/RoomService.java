@@ -39,7 +39,7 @@ public class RoomService {
         rooms.remove(id);
     }
 
-    // LINK SENSOR TO ROOM (FINAL VERSION WITH VALIDATION)
+    // LINK SENSOR TO ROOM
     public Room addSensorToRoom(String roomId, String sensorId) {
 
         Room room = rooms.get(roomId);
