@@ -14,9 +14,15 @@ public class SensorResource {
 
     private SensorService sensorService = new SensorService();
 
+    // UPDATED GET WITH FILTERING
     @GET
-    public List<Sensor> getSensors() {
-        return sensorService.getAllSensors();
+    public List<Sensor> getSensors(@QueryParam("type") String type) {
+
+        if (type == null) {
+            return sensorService.getAllSensors();
+        }
+
+        return sensorService.getSensorsByType(type);
     }
 
     @POST
