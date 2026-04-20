@@ -17,7 +17,22 @@ public class SensorService {
         sensors.put(sensor.getId(), sensor);
         return sensor;
     }
+
+    // CHECK IF SENSOR EXISTS
     public static boolean sensorExists(String id) {
         return sensors.containsKey(id);
+    }
+
+    // 🔥 NEW METHOD (FILTERING)
+    public List<Sensor> getSensorsByType(String type) {
+        List<Sensor> result = new ArrayList<>();
+
+        for (Sensor s : sensors.values()) {
+            if (s.getType().equalsIgnoreCase(type)) {
+                result.add(s);
+            }
+        }
+
+        return result;
     }
 }
