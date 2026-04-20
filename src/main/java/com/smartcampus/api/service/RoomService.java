@@ -39,7 +39,7 @@ public class RoomService {
         rooms.remove(id);
     }
 
-    // LINK SENSOR TO ROOM
+    // LINK SENSOR TO ROOM (FINAL VERSION WITH VALIDATION)
     public Room addSensorToRoom(String roomId, String sensorId) {
 
         Room room = rooms.get(roomId);
@@ -48,11 +48,17 @@ public class RoomService {
             throw new RoomNotFoundException("Room not found");
         }
 
-        // prevent duplicates
-        if (!room.getSensorIds().contains(sensorId)) {
-            room.getSensorIds().add(sensorId);
+        // check sensor exists
+        if (!SensorService.sensorExists(sensorId)) {
+            throw new RuntimeException("Sensor not found");
         }
 
+        // prevent duplicate assignment
+        if (room.getSensorIds().contains(sensorId)) {
+            throw new RuntimeException("Sensor already assigned to room");
+        }
+
+        room.getSensorIds().add(sensorId);
         return room;
     }
 }
