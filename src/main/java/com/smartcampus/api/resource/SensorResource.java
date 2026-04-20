@@ -2,6 +2,7 @@ package com.smartcampus.api.resource;
 
 import com.smartcampus.api.model.Sensor;
 import com.smartcampus.api.service.SensorService;
+import com.smartcampus.api.resource.SensorReadingResource; 
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -29,6 +30,7 @@ public class SensorResource {
         return sensorService.addSensor(sensor);
     }
 
+  
     @Path("/{sensorId}/readings")
     public SensorReadingResource getReadings(@PathParam("sensorId") String sensorId) {
         return new SensorReadingResource(sensorId);
