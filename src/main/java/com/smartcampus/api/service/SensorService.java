@@ -1,6 +1,7 @@
 package com.smartcampus.api.service;
 
 import com.smartcampus.api.model.Sensor;
+import com.smartcampus.api.exception.DuplicateResourceException; 
 import java.util.*;
 
 public class SensorService {
@@ -12,6 +13,11 @@ public class SensorService {
     }
 
     public Sensor addSensor(Sensor sensor) {
+
+        if (sensors.containsKey(sensor.getId())) {
+            throw new DuplicateResourceException("Sensor already exists");
+        }
+
         sensors.put(sensor.getId(), sensor);
         return sensor;
     }
