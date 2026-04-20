@@ -1,7 +1,8 @@
 package com.smartcampus.api.service;
 
 import com.smartcampus.api.model.Sensor;
-import com.smartcampus.api.exception.DuplicateResourceException; 
+import com.smartcampus.api.exception.DuplicateResourceException;
+import com.smartcampus.api.exception.SensorNotFoundException; 
 import java.util.*;
 
 public class SensorService {
@@ -39,9 +40,13 @@ public class SensorService {
     }
 
     public void updateSensorValue(String sensorId, double value) {
+
         Sensor sensor = sensors.get(sensorId);
-        if (sensor != null) {
-            sensor.setValue(value);
+
+        if (sensor == null) {
+            throw new SensorNotFoundException("Sensor not found");
         }
+
+        sensor.setValue(value);
     }
 }
