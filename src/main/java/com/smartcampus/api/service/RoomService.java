@@ -33,14 +33,17 @@ public class RoomService {
         return room;
     }
 
-    // DELETE ROOM
+    // DELETE ROOM 
     public void deleteRoom(String id) {
-        if (!rooms.containsKey(id)) {
-            throw new RoomNotFoundException("Room not found");
+        Room room = getRoomById(id); 
+        
+        if (!room.getSensorIds().isEmpty()) {
+            throw new com.smartcampus.api.exception.RoomNotEmptyException("Cannot delete room: active sensors are still assigned.");
         }
+        
         rooms.remove(id);
     }
-
+    
     // LINK SENSOR TO ROOM
     public Room addSensorToRoom(String roomId, String sensorId) {
 
