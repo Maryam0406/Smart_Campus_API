@@ -42,3 +42,4 @@ public class SensorReadingResource {
 
         return reading;
     }
+}

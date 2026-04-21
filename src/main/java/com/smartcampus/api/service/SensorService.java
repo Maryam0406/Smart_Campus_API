@@ -58,6 +58,6 @@ public class SensorService {
             throw new SensorNotFoundException("Sensor not found");
         }
 
-        sensor.setValue(value);
+        sensor.setCurrentValue(value);
     }
 }
