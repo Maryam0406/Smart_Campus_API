@@ -17,7 +17,7 @@ public class DiscoveryResource {
         Map<String, Object> response = new HashMap<>();
 
         response.put("version", "v1");
-        response.put("contact", "your-email@example.com");
+        response.put("contact", "mariyam.20241862@iit.ac.lk");
 
         Map<String, String> resources = new HashMap<>();
         resources.put("rooms", "/api/v1/rooms");
