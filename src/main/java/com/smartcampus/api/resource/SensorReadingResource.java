@@ -29,12 +29,16 @@ public class SensorReadingResource {
     // Add reading
     @POST
     public SensorReading addReading(SensorReading reading) {
+        
+        com.smartcampus.api.model.Sensor parentSensor = new SensorService().getSensorById(sensorId);
+        
+        if ("MAINTENANCE".equalsIgnoreCase(parentSensor.getStatus())) {
+            throw new com.smartcampus.api.exception.SensorUnavailableException("Sensor is currently offline for maintenance.");
+        }
 
         readings.computeIfAbsent(sensorId, k -> new ArrayList<>()).add(reading);
 
-        // update sensor value
         new SensorService().updateSensorValue(sensorId, reading.getValue());
 
         return reading;
     }
-}
