@@ -1,12 +1,14 @@
 Smart Campus API
 
 Overview
+
 The Smart Campus API is a strong, flexible backend web service that can handle university facilities and hardware.
 This API is made entirely with Java and JAX-RS(Jakarta RESTful Web Services). 
 It lets facilities managers and automated systems keep track of rooms and the many sensors (like CO2 monitors, occupancy trackers, and temperature sensors) that are spread out across the campus.
 The system has strict business logic rules, can handle deep nesting with sub-resources, and has strong error handling to protect data integrity without using a regular database.
 
 Setup & Build Instructions
+
 This project uses Maven for dependency management and runs on an embedded Grizzly HTTP server.
 
 Prerequisites:
@@ -37,6 +39,7 @@ Setup & Build Instructions:
         After testing is completed, go back to the first window and press Enter to shut the server down.
 
 API Usage Examples (cURL Commands)
+
 Ensure the server is running before executing these commands in a new terminal window.
 
 1. Discover API Capabilities
