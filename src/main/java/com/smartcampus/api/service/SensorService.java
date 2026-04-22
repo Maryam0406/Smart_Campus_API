@@ -3,6 +3,7 @@ package com.smartcampus.api.service;
 import com.smartcampus.api.model.Sensor;
 import com.smartcampus.api.exception.DuplicateResourceException;
 import com.smartcampus.api.exception.SensorNotFoundException; 
+import com.smartcampus.api.model.Room;
 import java.util.*;
 
 public class SensorService {
@@ -21,19 +22,26 @@ public class SensorService {
     }
 
     public Sensor addSensor(Sensor sensor) {
-        if (sensors.containsKey(sensor.getId())) {
-            throw new DuplicateResourceException("Sensor already exists");
-        }
+            if (sensors.containsKey(sensor.getId())) {
+                throw new DuplicateResourceException("Sensor already exists");
+            }
 
-        try {
-            new RoomService().getRoomById(sensor.getRoomId());
-        } catch (com.smartcampus.api.exception.RoomNotFoundException e) {
-            throw new com.smartcampus.api.exception.LinkedResourceNotFoundException("The specified roomId does not exist.");
-        }
+            try {
+                RoomService roomService = new RoomService();
+                Room room = roomService.getRoomById(sensor.getRoomId());
 
-        sensors.put(sensor.getId(), sensor);
-        return sensor;
-    }
+                // THE FIX: Actually add the sensor's ID to the room's list!
+                if (!room.getSensorIds().contains(sensor.getId())) {
+                    room.getSensorIds().add(sensor.getId());
+                }
+
+            } catch (com.smartcampus.api.exception.RoomNotFoundException e) {
+                throw new com.smartcampus.api.exception.LinkedResourceNotFoundException("The specified roomId does not exist.");
+            }
+
+            sensors.put(sensor.getId(), sensor);
+            return sensor;
+        }
     public static boolean sensorExists(String id) {
         return sensors.containsKey(id);
     }
