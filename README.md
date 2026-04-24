@@ -77,6 +77,7 @@ curl -X POST http://localhost:8080/api/v1/sensors/CO2-001/readings -H "Content-T
 curl -X DELETE http://localhost:8080/api/v1/rooms/LIB-301
 
 
+Answers:
 
 Part 1: Service Architecture & Setup
 1.	Project & Application Configuration
